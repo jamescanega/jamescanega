@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JustJames.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #f0f4f8, #e2e8f0);
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background: #0f172a;
+      color: #f1f5f9;
+    }
+
+    #binaryCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: #0f172a;
+    }
+
+    nav {
+      background: linear-gradient(90deg, #0f172a, #1e293b);
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      padding: 0.4em 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .container {
+      padding: 3em 2em;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 1em;
+      color: inherit;
+    }
+
+    .card {
+      background: white;
+      padding: 2em;
+      margin: 1em 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeIn 0.6s ease forwards;
+      cursor: pointer;
+    }
+
+    body.dark .card {
+      background: #1e293b;
+      color: #f1f5f9;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .card::before {
+      content: "";
+      display: block;
+      height: 5px;
+      width: 0;
+      background: #38bdf8;
+      margin-bottom: 10px;
+      transition: width 0.4s;
+    }
+
+    .card:hover::before {
+      width: 100%;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .resume-btn {
+      display: inline-block;
+      margin-top: 1em;
+      text-align: center;
+      text-decoration: none;
+      padding: 0.75em 2em;
+      background: #0ea5e9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .resume-btn:hover {
+      background: #0369a1;
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    a {
+      color: #0ea5e9;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img.profile-pic {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 1em;
+      border-radius: 50%;
+      border: 4px solid #38bdf8;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="binaryCanvas"></canvas>
+
+  <nav>
+    <div style="font-size: 1.5em;"><strong>JustJames.com</strong></div>
+    <div>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('skills')">Hobbies</a>
+      <a onclick="showPage('contact')">Contact</a>
+      <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+  </nav>
+
+  <div id="home" class="container active">
+    <h2>Hello, I'm James</h2>
+    <div class="card" style="text-align: center;">
+      <img src="https://i.ibb.co/fVzZwWXQ/1724760519858-hdtcls-2-0-removebg-preview.png" alt="James Image" class="profile-pic" />
+      <p>I'm James Hasley C. Cañega<br />IT Student.</p>
+    </div>
+  </div>
+
+  <div id="about" class="container hidden">
+    <h2>About Me</h2>
+    <div class="card">
+      My name is James Hasley C. Cañega, I am 18 years old and currently residing in Sawang, Carigara, Leyte. I am a first-year Information Technology student at Eastern Visayas State University – Carigara Campus. I am passionate about learning and eager to explore the world of technology as I build a strong foundation for my future career. I take pride in my roots and am committed to making the most of the opportunities available to me as I strive toward personal and academic growth.
+    </div>
+  </div>
+
+  <div id="skills" class="container hidden">
+    <h2>Hobbies</h2>
+    <div class="card">Travelling Different Places</div>
+    <div class="card">Playing Online Games</div>
+    <div class="card">Eating</div>
+  </div>
+
+  <div id="contact" class="container hidden">
+    <h2>Contact Me</h2>
+    <div class="card">
+      <p><i class="fab fa-facebook" style="margin-right: 8px; color: #1877f2;"></i><strong>Facebook:</strong>
+        <a href="https://www.facebook.com/profile.php?id=100076188445005&mibextid=ZbWKwL" target="_blank">Visit my profile</a>
+      </p>
+      <p><i class="fas fa-envelope" style="margin-right: 8px; color: #ea4335;"></i><strong>Gmail:</strong>
+        <a href="mailto:jamescanega40@gmail.com">jamescanega40@gmail.com</a>
+      </p>
+      <p><i class="fas fa-phone" style="margin-right: 8px; color: #10b981;"></i><strong>Contact No.:</strong> 09708987574</p>
+    </div>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.container').forEach(page => {
+        page.classList.add('hidden');
+        page.classList.remove('active');
+      });
+      const target = document.getElementById(pageId);
+      target.classList.remove('hidden');
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+
+    // Binary background animation
+    const canvas = document.getElementById("binaryCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "01";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(15, 23, 42, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#38bdf8";
+      ctx.font = fontSize + "px monospace";
+
+      drops.forEach((y, i) => {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        const x = i * fontSize;
+        ctx.fillText(text, x, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      });
+    }
+
+    setInterval(drawMatrix, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
